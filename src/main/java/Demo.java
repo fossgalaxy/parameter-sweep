@@ -12,7 +12,7 @@ public class Demo {
         for(Boolean result : sweep.getBoolean("bool")){
             System.out.println("Boolean was: " + result);
             System.out.println("I: " + i++);
-            if(i > 150) break;
+            if(i > 10) break;
         }
 
         sweep.setInteger("int", 10, 20);
@@ -26,6 +26,16 @@ public class Demo {
             }
         }catch (Exception e){
             System.out.println(e.toString());
+        }
+
+        sweep.setInteger("I", 0, 3, 1);
+        sweep.setDouble("J", 0.0d, 1.0d, 0.25d);
+
+        for(int k : sweep.getInteger("I")){
+            System.out.println("Here");
+            for(double j : sweep.getDouble("J")){
+                System.out.println("K: " + k + " J: " + j);
+            }
         }
     }
 }

@@ -1,3 +1,6 @@
+import iteration.DoubleIterable;
+import iteration.FloatIterable;
+import iteration.IntegerIterable;
 import rules.BooleanRule;
 import rules.DoubleRule;
 import rules.FloatRule;
@@ -111,7 +114,7 @@ public class Implementation implements ParameterSweep {
     }
 
     public Iterable<Boolean> getBoolean(final String key, final Integer n) {
-        if(!booleanRules.containsKey(key)) throw new IllegalArgumentException("Key not present: " + key);
+        if (!booleanRules.containsKey(key)) throw new IllegalArgumentException("Key not present: " + key);
         return new Iterable<Boolean>() {
             int count = 0;
             BooleanRule rule = booleanRules.get(key);
@@ -142,32 +145,8 @@ public class Implementation implements ParameterSweep {
     }
 
     public Iterable<Integer> getInteger(final String key, final Integer n) {
-        if(!integerRules.containsKey(key)) throw new IllegalArgumentException("Key not present: " + key);
-        return new Iterable<Integer>() {
-            int count = 0;
-            IntegerRule rule = integerRules.get(key);
-            Random random = new Random();
-
-            public Iterator<Integer> iterator() {
-                return new Iterator<Integer>() {
-                    public boolean hasNext() {
-                        return (n == null) || (count < n);
-                    }
-
-                    public Integer next() {
-                        if (rule.getStep() == null) {
-                            count++;
-                            return random.nextInt((rule.getMaxValue() - rule.getMinValue()) + 1) + rule.getMinValue();
-                        }
-                        return rule.getMinValue() + (count++ * rule.getStep());
-                    }
-
-                    public void remove() {
-
-                    }
-                };
-            }
-        };
+        if (!integerRules.containsKey(key)) throw new IllegalArgumentException("Key not present: " + key);
+        return new IntegerIterable(integerRules.get(key), n);
     }
 
     public Iterable<Float> getFloat(final String key) {
@@ -175,32 +154,8 @@ public class Implementation implements ParameterSweep {
     }
 
     public Iterable<Float> getFloat(final String key, final Integer n) {
-        if(!floatRules.containsKey(key)) throw new IllegalArgumentException("Key not present: " + key);
-        return new Iterable<Float>() {
-            int count = 0;
-            FloatRule rule = floatRules.get(key);
-            Random random = new Random();
-
-            public Iterator<Float> iterator() {
-                return new Iterator<Float>() {
-                    public boolean hasNext() {
-                        return (n == null) || (count < n);
-                    }
-
-                    public Float next() {
-                        if (rule.getStep() == null) {
-                            count++;
-                            return (random.nextFloat() * (rule.getMaxValue() - rule.getMinValue())) + rule.getMinValue();
-                        }
-                        return rule.getMinValue() + (count++ * rule.getStep());
-                    }
-
-                    public void remove() {
-
-                    }
-                };
-            }
-        };
+        if (!floatRules.containsKey(key)) throw new IllegalArgumentException("Key not present: " + key);
+        return new FloatIterable(floatRules.get(key), n);
     }
 
     public Iterable<Double> getDouble(final String key) {
@@ -208,31 +163,7 @@ public class Implementation implements ParameterSweep {
     }
 
     public Iterable<Double> getDouble(final String key, final Integer n) {
-        if(!doubleRules.containsKey(key)) throw new IllegalArgumentException("Key not present: " + key);
-        return new Iterable<Double>() {
-            int count = 0;
-            DoubleRule rule = doubleRules.get(key);
-            Random random = new Random();
-
-            public Iterator<Double> iterator() {
-                return new Iterator<Double>() {
-                    public boolean hasNext() {
-                        return (n == null) || (n < count);
-                    }
-
-                    public Double next() {
-                        if (rule.getStep() == null) {
-                            count++;
-                            return (random.nextDouble() * (rule.getMaxValue() - rule.getMinValue())) + rule.getMinValue();
-                        }
-                        return rule.getMaxValue() + (count++ * rule.getStep());
-                    }
-
-                    public void remove() {
-
-                    }
-                };
-            }
-        };
+        if (!doubleRules.containsKey(key)) throw new IllegalArgumentException("Key not present: " + key);
+        return new DoubleIterable(doubleRules.get(key), n);
     }
 }
