@@ -219,7 +219,7 @@ public class Implementation implements ParameterSweep {
         if (!integerRules.containsKey(key) && !integerOneOfRules.containsKey(key)) {
             throw new IllegalArgumentException("Key not present: " + key);
         }
-        return (integerRules.containsKey(key)) ? new IntegerIterable(integerRules.get(key), n) : new OneOfIterable<>(integerOneOfRules.get(key));
+        return (integerRules.containsKey(key)) ? new IntegerIterable(integerRules.get(key), n) : new OneOfIterable<>(integerOneOfRules.get(key), n);
     }
 
     @Override
@@ -232,7 +232,7 @@ public class Implementation implements ParameterSweep {
         if (!floatRules.containsKey(key) && !floatOneOfRules.containsKey(key)) {
             throw new IllegalArgumentException("Key not present: " + key);
         }
-        return (floatRules.containsKey(key)) ? new FloatIterable(floatRules.get(key), n) : new OneOfIterable<>(floatOneOfRules.get(key));
+        return (floatRules.containsKey(key)) ? new FloatIterable(floatRules.get(key), n) : new OneOfIterable<>(floatOneOfRules.get(key), n);
     }
 
     @Override
@@ -242,10 +242,10 @@ public class Implementation implements ParameterSweep {
 
     @Override
     public Iterable<Double> getDouble(final String key, final Integer n) {
-        if (!doubleRules.containsKey(key) && !doubleOneOfRules.containsKey(key)){
+        if (!doubleRules.containsKey(key) && !doubleOneOfRules.containsKey(key)) {
             throw new IllegalArgumentException("Key not present: " + key);
         }
-        return (doubleRules.containsKey(key)) ? new DoubleIterable(doubleRules.get(key), n) : new OneOfIterable<>(doubleOneOfRules.get(key));
+        return (doubleRules.containsKey(key)) ? new DoubleIterable(doubleRules.get(key), n) : new OneOfIterable<>(doubleOneOfRules.get(key), n);
     }
 
     @Override
@@ -255,8 +255,8 @@ public class Implementation implements ParameterSweep {
 
     @Override
     public Iterable<Object> getObject(String key, Integer n) {
-        if(!objectOneOfRules.containsKey(key)){
-            throw  new IllegalArgumentException("Key not present: " + key);
+        if (!objectOneOfRules.containsKey(key)) {
+            throw new IllegalArgumentException("Key not present: " + key);
         }
         return new OneOfIterable<>(objectOneOfRules.get(key), n);
     }
