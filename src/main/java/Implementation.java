@@ -250,9 +250,14 @@ public class Implementation implements ParameterSweep {
 
     @Override
     public Iterable<Object> getObject(String key) {
+        return getObject(key, null);
+    }
+
+    @Override
+    public Iterable<Object> getObject(String key, Integer n) {
         if(!objectOneOfRules.containsKey(key)){
             throw  new IllegalArgumentException("Key not present: " + key);
         }
-        return new OneOfIterable<>(objectOneOfRules.get(key));
+        return new OneOfIterable<>(objectOneOfRules.get(key), n);
     }
 }
