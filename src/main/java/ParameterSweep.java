@@ -57,12 +57,20 @@ public interface ParameterSweep {
      * maxValue may never be returned if it isn't possible due to the step and minValue
      *
      * for example ("T", 2, 5, 2) can't return 5
-     * @param key
-     * @param minValue
-     * @param maxValue
-     * @param step
+     * @param key The key for use
+     * @param minValue The minimum value that can be returned
+     * @param maxValue The maximum value that can be returned
+     * @param step The step of the values
      */
     void setInteger(String key, int minValue, int maxValue, int step);
+
+    /**
+     * Sets a new parameter that traverses through the given values in the order given
+     *
+     * @param key The key for use
+     * @param values The values for use
+     */
+    void setOneOfInteger(String key, Integer... values);
 
     void setFloat(String key);
     void setFloat(String key, int decimalPlaces);
@@ -83,6 +91,11 @@ public interface ParameterSweep {
     void setDouble(String key, double minValue, double maxValue, double step, int decimalPlaces);
 
 
+    void setOneOfFloat(String key, Float... values);
+    void setOneOfDouble(String key, Double... values);
+
+    void setOneOf(String key, Object... values);
+
     Iterable<Boolean> getBoolean(String key);
     Iterable<Boolean> getBoolean(String key, Integer n);
     Iterable<Integer> getInteger(String key);
@@ -91,6 +104,7 @@ public interface ParameterSweep {
     Iterable<Float> getFloat(String key, Integer n);
     Iterable<Double> getDouble(String key);
     Iterable<Double> getDouble(String key, Integer n);
+    Iterable<Object> getObject(String key);
 
 
 }
