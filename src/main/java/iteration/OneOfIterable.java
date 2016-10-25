@@ -28,9 +28,9 @@ public class OneOfIterable<T> implements Iterable<T> {
 
             @Override
             public T next() {
+                count = count % (rule.numValues() + 1);
                 T item = rule.getValues()[count];
                 count++;
-                count %= rule.numValues();
                 return item;
             }
 

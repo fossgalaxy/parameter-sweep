@@ -37,5 +37,10 @@ public class Demo {
                 System.out.println("K: " + k + " J: " + j);
             }
         }
+
+        sweep.setOneOf("J", "a", "b", "c", "d");
+        for(Object j : sweep.getObject("J")){
+            System.out.println(j);
+        }
     }
 }
