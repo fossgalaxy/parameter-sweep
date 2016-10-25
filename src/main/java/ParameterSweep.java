@@ -105,6 +105,8 @@ public interface ParameterSweep {
     Iterable<Double> getDouble(String key);
     Iterable<Double> getDouble(String key, Integer n);
     Iterable<Object> getObject(String key);
+    Iterable<Object> getObject(String key, Integer n);
+
 
 
 }

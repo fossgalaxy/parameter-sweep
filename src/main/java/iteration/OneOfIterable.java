@@ -11,9 +11,11 @@ public class OneOfIterable<T> implements Iterable<T> {
 
     private final OneOfRule<T> rule;
     private int count = 0;
+    private final int iterations;
 
-    public OneOfIterable(OneOfRule<T> rule) {
+    public OneOfIterable(OneOfRule<T> rule, Integer n) {
         this.rule = rule;
+        iterations = (n == null)? rule.numValues() : n;
     }
 
     @Override
@@ -21,7 +23,7 @@ public class OneOfIterable<T> implements Iterable<T> {
         return new Iterator<T>() {
             @Override
             public boolean hasNext() {
-                return true;
+                return count < iterations;
             }
 
             @Override
