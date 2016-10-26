@@ -1,3 +1,6 @@
+import java.util.Objects;
+import java.util.stream.Stream;
+
 /**
  * Created by piers on 04/08/16.
  *
@@ -98,14 +101,24 @@ public interface ParameterSweep {
 
     Iterable<Boolean> getBoolean(String key);
     Iterable<Boolean> getBoolean(String key, Integer n);
+
     Iterable<Integer> getInteger(String key);
     Iterable<Integer> getInteger(String key, Integer n);
+    Stream<Integer> getIntegerStream(String key, Integer n);
+
+
     Iterable<Float> getFloat(String key);
     Iterable<Float> getFloat(String key, Integer n);
+    Stream<Float> getFloatStream(String key, Integer n);
+
     Iterable<Double> getDouble(String key);
     Iterable<Double> getDouble(String key, Integer n);
+    Stream<Double> getDoubleStream(String key, Integer n);
+
     Iterable<Object> getObject(String key);
     Iterable<Object> getObject(String key, Integer n);
+    Stream getObjectStream(String key, Integer n);
+    <T extends Object> Stream<T> getObjectStream(String key, Integer n, Class<T> clazz);
 
 
 

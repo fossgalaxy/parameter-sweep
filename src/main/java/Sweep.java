@@ -1,22 +1,21 @@
-import iteration.DoubleIterable;
-import iteration.FloatIterable;
-import iteration.IntegerIterable;
-import iteration.OneOfIterable;
+import iteration.*;
 import rules.*;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Random;
+import java.util.stream.Stream;
 
 /**
  * Created by piers on 04/08/16.
  */
-public class Implementation implements ParameterSweep {
+public class Sweep implements ParameterSweep {
 
-    private final HashMap<String, BooleanRule> booleanRules = new HashMap<String, BooleanRule>();
-    private final HashMap<String, IntegerRule> integerRules = new HashMap<String, IntegerRule>();
-    private final HashMap<String, FloatRule> floatRules = new HashMap<String, FloatRule>();
-    private final HashMap<String, DoubleRule> doubleRules = new HashMap<String, DoubleRule>();
+    private final HashMap<String, BooleanRule> booleanRules = new HashMap<>();
+    private final HashMap<String, IntegerRule> integerRules = new HashMap<>();
+    private final HashMap<String, FloatRule> floatRules = new HashMap<>();
+    private final HashMap<String, DoubleRule> doubleRules = new HashMap<>();
     private final HashMap<String, OneOfRule<Integer>> integerOneOfRules = new HashMap<>();
     private final HashMap<String, OneOfRule<Float>> floatOneOfRules = new HashMap<>();
     private final HashMap<String, OneOfRule<Double>> doubleOneOfRules = new HashMap<>();
@@ -223,6 +222,11 @@ public class Implementation implements ParameterSweep {
     }
 
     @Override
+    public Stream<Integer> getIntegerStream(String key, Integer n) {
+        return Stream.generate(new IterableToSupplier<>(getInteger(key, n)));
+    }
+
+    @Override
     public Iterable<Float> getFloat(final String key) {
         return getFloat(key, null);
     }
@@ -233,6 +237,11 @@ public class Implementation implements ParameterSweep {
             throw new IllegalArgumentException("Key not present: " + key);
         }
         return (floatRules.containsKey(key)) ? new FloatIterable(floatRules.get(key), n) : new OneOfIterable<>(floatOneOfRules.get(key), n);
+    }
+
+    @Override
+    public Stream<Float> getFloatStream(String key, Integer n) {
+        return Stream.generate(new IterableToSupplier<>(getFloat(key, n)));
     }
 
     @Override
@@ -249,6 +258,11 @@ public class Implementation implements ParameterSweep {
     }
 
     @Override
+    public Stream<Double> getDoubleStream(final String key, final Integer n) {
+        return Stream.generate(new IterableToSupplier<>(getDouble(key, n)));
+    }
+
+    @Override
     public Iterable<Object> getObject(String key) {
         return getObject(key, null);
     }
@@ -259,5 +273,22 @@ public class Implementation implements ParameterSweep {
             throw new IllegalArgumentException("Key not present: " + key);
         }
         return new OneOfIterable<>(objectOneOfRules.get(key), n);
+    }
+
+    @Override
+    public Stream getObjectStream(String key, Integer n) {
+        OneOfRule rule = objectOneOfRules.get(key);
+        if (n == null || n >= rule.numValues()) {
+            return Arrays.stream((rule.getValues()));
+        }
+        Object[] temp = new Object[n];
+        System.arraycopy(rule.getValues(), 0, temp, 0, n);
+        return Arrays.stream(temp);
+    }
+
+    public <T> Stream<T> getObjectStream(String key, Integer n, Class<T> clazz) {
+        return getObjectStream(key, n)
+                .filter(clazz::isInstance)
+                .map(clazz::cast);
     }
 }

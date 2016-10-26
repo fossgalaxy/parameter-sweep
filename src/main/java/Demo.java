@@ -4,7 +4,7 @@
 public class Demo {
 
     public static void main(String[] args) {
-        ParameterSweep sweep = new Implementation();
+        ParameterSweep sweep = new Sweep();
 
         sweep.setBoolean("bool", 0.75);
 
@@ -42,5 +42,30 @@ public class Demo {
         for(Object j : sweep.getObject("J")){
             System.out.println(j);
         }
+
+        sweep.setOneOf("Students", new Student("Alice", 10), new Student("Bob", 20), new Student("Eve", 100));
+        sweep.getObjectStream("Students", 3).forEach(System.out::println);
+
+        sweep.getObjectStream("Students", 3, Student.class)
+                .map(x -> x.name + ":" + x.grades)
+                .forEach(System.out::println);
+    }
+}
+
+class Student{
+    String name;
+    int grades;
+
+    public Student(String name, int grades) {
+        this.name = name;
+        this.grades = grades;
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "name='" + name + '\'' +
+                ", grades=" + grades +
+                '}';
     }
 }

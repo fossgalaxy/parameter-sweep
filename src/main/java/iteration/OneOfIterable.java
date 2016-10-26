@@ -3,6 +3,7 @@ package iteration;
 import rules.OneOfRule;
 
 import java.util.Iterator;
+import java.util.function.Supplier;
 
 /**
  * Created by piers on 25/10/16.
