@@ -104,20 +104,25 @@ public interface ParameterSweep {
 
     Iterable<Integer> getInteger(String key);
     Iterable<Integer> getInteger(String key, Integer n);
+    Stream<Integer> getIntegerStream(String key);
     Stream<Integer> getIntegerStream(String key, Integer n);
 
 
     Iterable<Float> getFloat(String key);
     Iterable<Float> getFloat(String key, Integer n);
+    Stream<Float> getFloatStream(String key);
     Stream<Float> getFloatStream(String key, Integer n);
 
     Iterable<Double> getDouble(String key);
     Iterable<Double> getDouble(String key, Integer n);
+    Stream<Double> getDoubleStream(String key);
     Stream<Double> getDoubleStream(String key, Integer n);
 
     Iterable<Object> getObject(String key);
     Iterable<Object> getObject(String key, Integer n);
+    Stream getObjectStream(String key);
     Stream getObjectStream(String key, Integer n);
+    <T extends Object> Stream<T> getObjectStream(String key, Class<T> clazz);
     <T extends Object> Stream<T> getObjectStream(String key, Integer n, Class<T> clazz);
 
 

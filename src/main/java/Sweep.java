@@ -174,7 +174,7 @@ public class Sweep implements ParameterSweep {
     public void setOneOf(String key, Object... values) {
         objectOneOfRules.put(key, new OneOfRule<>(values));
     }
-
+    
     @Override
     public Iterable<Boolean> getBoolean(final String key) {
         return getBoolean(key, null);
@@ -222,6 +222,11 @@ public class Sweep implements ParameterSweep {
     }
 
     @Override
+    public Stream<Integer> getIntegerStream(String key) {
+        return getIntegerStream(key, null);
+    }
+
+    @Override
     public Stream<Integer> getIntegerStream(String key, Integer n) {
         return Stream.generate(new IterableToSupplier<>(getInteger(key, n)));
     }
@@ -237,6 +242,11 @@ public class Sweep implements ParameterSweep {
             throw new IllegalArgumentException("Key not present: " + key);
         }
         return (floatRules.containsKey(key)) ? new FloatIterable(floatRules.get(key), n) : new OneOfIterable<>(floatOneOfRules.get(key), n);
+    }
+
+    @Override
+    public Stream<Float> getFloatStream(String key) {
+        return getFloatStream(key, null);
     }
 
     @Override
@@ -258,6 +268,11 @@ public class Sweep implements ParameterSweep {
     }
 
     @Override
+    public Stream<Double> getDoubleStream(String key) {
+        return getDoubleStream(key, null);
+    }
+
+    @Override
     public Stream<Double> getDoubleStream(final String key, final Integer n) {
         return Stream.generate(new IterableToSupplier<>(getDouble(key, n)));
     }
@@ -276,14 +291,24 @@ public class Sweep implements ParameterSweep {
     }
 
     @Override
+    public Stream getObjectStream(String key) {
+        return getObjectStream(key, -1);
+    }
+
+    @Override
     public Stream getObjectStream(String key, Integer n) {
         OneOfRule rule = objectOneOfRules.get(key);
-        if (n == null || n >= rule.numValues()) {
+        if (n == null || n < 0 || n >= rule.numValues()) {
             return Arrays.stream((rule.getValues()));
         }
         Object[] temp = new Object[n];
         System.arraycopy(rule.getValues(), 0, temp, 0, n);
         return Arrays.stream(temp);
+    }
+
+    @Override
+    public <T> Stream<T> getObjectStream(String key, Class<T> clazz) {
+        return getObjectStream(key, null, clazz);
     }
 
     public <T> Stream<T> getObjectStream(String key, Integer n, Class<T> clazz) {

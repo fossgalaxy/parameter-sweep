@@ -1,3 +1,7 @@
+import java.util.function.Function;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
+
 /**
  * Created by piers on 04/08/16.
  */
@@ -39,11 +43,18 @@ public class Demo {
         }
 
         sweep.setOneOf("J", "a", "b", "c", "d");
-        for(Object j : sweep.getObject("J")){
+        for(Object j : sweep.getObject("J")) {
             System.out.println(j);
         }
 
-        sweep.setOneOf("Students", new Student("Alice", 10), new Student("Bob", 20), new Student("Eve", 100));
+        String[] studentNames = "Alice,Bob,Eve".split(",");
+        int[] grades = new int[]{10, 20, 40};
+
+        Student[] students = IntStream.range(0, Math.min(studentNames.length, grades.length))
+                .mapToObj(index -> new Student(studentNames[index], grades[index]))
+                .toArray(Student[]::new);
+
+        sweep.setOneOf("Students", students);
         sweep.getObjectStream("Students", 3).forEach(System.out::println);
 
         sweep.getObjectStream("Students", 3, Student.class)
