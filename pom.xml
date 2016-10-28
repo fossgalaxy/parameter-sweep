@@ -13,6 +13,21 @@
     <artifactId>parameter-sweep</artifactId>
     <version>1.0</version>
 
+ <distributionManagement>
+    <site>
+      <id>fossgalaxy.website.static</id>
+      <url>scp://docs.fossgalaxy.com/srv/public_sites/${project.artifactId}</url>
+    </site>
+  </distributionManagement>
+
+	<developers>
+		<developer>
+			<id>pwillic</id>
+			<name>Piers Williams</name>
+			<email>pwillic@essex.ac.uk</email>
+		</developer>
+	</developers>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
