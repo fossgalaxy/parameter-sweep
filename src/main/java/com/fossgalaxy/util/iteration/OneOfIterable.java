@@ -3,6 +3,7 @@ package com.fossgalaxy.util.iteration;
 import com.fossgalaxy.util.rules.OneOfRule;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 /**
  * Created by piers on 25/10/16.
@@ -28,6 +29,9 @@ public class OneOfIterable<T> implements Iterable<T> {
 
             @Override
             public T next() {
+                if(!hasNext()){
+                    throw new NoSuchElementException();
+                }
                 count = count % (rule.numValues() + 1);
                 T item = rule.getValues()[count];
                 count++;

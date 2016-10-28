@@ -3,10 +3,7 @@ package com.fossgalaxy.util;
 import com.fossgalaxy.util.iteration.*;
 import com.fossgalaxy.util.rules.*;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Random;
+import java.util.*;
 import java.util.stream.Stream;
 
 /**
@@ -198,6 +195,9 @@ public class Sweep implements ParameterSweep {
                     }
 
                     public Boolean next() {
+                        if(!hasNext()){
+                            throw new NoSuchElementException();
+                        }
                         count++;
                         return rule.getTrueProbability() < random.nextDouble();
                     }
