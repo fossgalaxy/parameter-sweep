@@ -1,5 +1,7 @@
-import iteration.*;
-import rules.*;
+package com.fossgalaxy.util;
+
+import com.fossgalaxy.util.iteration.*;
+import com.fossgalaxy.util.rules.*;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -174,7 +176,7 @@ public class Sweep implements ParameterSweep {
     public void setOneOf(String key, Object... values) {
         objectOneOfRules.put(key, new OneOfRule<>(values));
     }
-    
+
     @Override
     public Iterable<Boolean> getBoolean(final String key) {
         return getBoolean(key, null);

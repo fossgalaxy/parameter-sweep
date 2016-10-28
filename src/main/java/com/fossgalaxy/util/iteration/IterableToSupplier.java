@@ -1,4 +1,4 @@
-package iteration;
+package com.fossgalaxy.util.iteration;
 
 import java.util.Iterator;
 import java.util.function.Supplier;
@@ -14,13 +14,13 @@ public class IterableToSupplier<T> implements Supplier<T> {
         iterableIterator = iterable.iterator();
     }
 
-    public IterableToSupplier(OneOfIterable<T> iterable){
+    public IterableToSupplier(OneOfIterable<T> iterable) {
         iterableIterator = iterable.iterator();
     }
 
     @Override
     public T get() {
-        if(iterableIterator.hasNext()){
+        if (iterableIterator.hasNext()) {
             return iterableIterator.next();
         }
         return null;

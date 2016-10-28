@@ -1,6 +1,6 @@
-package iteration;
+package com.fossgalaxy.util.iteration;
 
-import rules.NumberRule;
+import com.fossgalaxy.util.rules.NumberRule;
 
 import java.util.Iterator;
 
@@ -23,7 +23,7 @@ public class FloatIterable extends NumberIterable<Float> {
 
             @Override
             public Float next() {
-                if(step == null){
+                if (step == null) {
                     count++;
                     return (random.nextFloat() * (max - min)) + min;
                 }

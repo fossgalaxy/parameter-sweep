@@ -1,4 +1,4 @@
-package rules;
+package com.fossgalaxy.util.rules;
 
 /**
  * Created by piers on 04/08/16.
@@ -6,7 +6,7 @@ package rules;
 public class BooleanRule {
     private final Double trueProbability;
 
-    public BooleanRule(){
+    public BooleanRule() {
         this(0.5d);
     }
 

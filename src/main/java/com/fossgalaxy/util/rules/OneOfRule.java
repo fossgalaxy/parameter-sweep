@@ -1,13 +1,13 @@
-package rules;
+package com.fossgalaxy.util.rules;
 
 /**
  * Created by piers on 25/10/16.
  */
-public class OneOfRule <T> {
+public class OneOfRule<T> {
 
     private final T[] values;
 
-    public OneOfRule(T... values){
+    public OneOfRule(T... values) {
         this.values = values;
     }
 
@@ -15,7 +15,7 @@ public class OneOfRule <T> {
         return values;
     }
 
-    public int numValues(){
+    public int numValues() {
         return values.length;
     }
 }

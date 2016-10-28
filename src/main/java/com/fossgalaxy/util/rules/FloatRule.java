@@ -1,4 +1,4 @@
-package rules;
+package com.fossgalaxy.util.rules;
 
 /**
  * Created by piers on 04/08/16.

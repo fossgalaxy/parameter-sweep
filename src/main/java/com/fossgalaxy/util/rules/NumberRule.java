@@ -1,4 +1,4 @@
-package rules;
+package com.fossgalaxy.util.rules;
 
 /**
  * Created by piers on 04/08/16.
@@ -10,31 +10,31 @@ public abstract class NumberRule<T extends Number> {
     private final T step;
     private final Integer decimalPlaces;
 
-    public NumberRule(){
+    public NumberRule() {
         this(null, null, null, null);
     }
 
-    public NumberRule(Integer[] decimalPlaces){
+    public NumberRule(Integer[] decimalPlaces) {
         this(null, null, null, decimalPlaces);
     }
 
-    public NumberRule(T maxValue){
+    public NumberRule(T maxValue) {
         this(null, maxValue, null, null);
     }
 
-    public NumberRule(T maxValue, Integer[] decimalPlaces){
+    public NumberRule(T maxValue, Integer[] decimalPlaces) {
         this(null, maxValue, null, decimalPlaces);
     }
 
-    public NumberRule(T minValue, T maxValue){
+    public NumberRule(T minValue, T maxValue) {
         this(minValue, maxValue, null, null);
     }
 
-    public NumberRule(T minValue, T maxValue, Integer[] decimalPlaces){
+    public NumberRule(T minValue, T maxValue, Integer[] decimalPlaces) {
         this(minValue, maxValue, null, decimalPlaces);
     }
 
-    public NumberRule(T minValue, T maxValue, T step){
+    public NumberRule(T minValue, T maxValue, T step) {
         this(minValue, maxValue, step, null);
     }
 

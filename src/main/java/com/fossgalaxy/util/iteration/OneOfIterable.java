@@ -1,9 +1,8 @@
-package iteration;
+package com.fossgalaxy.util.iteration;
 
-import rules.OneOfRule;
+import com.fossgalaxy.util.rules.OneOfRule;
 
 import java.util.Iterator;
-import java.util.function.Supplier;
 
 /**
  * Created by piers on 25/10/16.
@@ -11,12 +10,12 @@ import java.util.function.Supplier;
 public class OneOfIterable<T> implements Iterable<T> {
 
     private final OneOfRule<T> rule;
-    private int count = 0;
     private final int iterations;
+    private int count = 0;
 
     public OneOfIterable(OneOfRule<T> rule, Integer n) {
         this.rule = rule;
-        iterations = (n == null)? rule.numValues() : n;
+        iterations = (n == null) ? rule.numValues() : n;
     }
 
     @Override

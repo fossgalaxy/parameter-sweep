@@ -1,6 +1,6 @@
-package iteration;
+package com.fossgalaxy.util.iteration;
 
-import rules.NumberRule;
+import com.fossgalaxy.util.rules.NumberRule;
 
 import java.util.Iterator;
 
@@ -11,9 +11,9 @@ public class IntegerIterable extends NumberIterable<Integer> {
 
     public IntegerIterable(NumberRule<Integer> rule, Integer n) {
         super(rule, n);
-        if(step == null){
+        if (step == null) {
             iterations = n;
-        }else if(n == null){
+        } else if (n == null) {
             iterations = ((max - min) / step);
         }
     }
@@ -28,7 +28,7 @@ public class IntegerIterable extends NumberIterable<Integer> {
 
             @Override
             public Integer next() {
-                if(step == null){
+                if (step == null) {
                     count++;
                     return random.nextInt(max - min + 1) + min;
                 }

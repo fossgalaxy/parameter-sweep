@@ -1,14 +1,13 @@
-package iteration;
+package com.fossgalaxy.util.iteration;
 
-import rules.NumberRule;
+import com.fossgalaxy.util.rules.NumberRule;
 
-import java.util.Iterator;
 import java.util.Random;
 
 /**
  * Created by Piers on 09/08/2016.
  */
-public abstract class NumberIterable<T extends Number> implements Iterable<T>{
+public abstract class NumberIterable<T extends Number> implements Iterable<T> {
     protected int count = 0;
     protected T min, max, step;
     protected Integer decimalPlaces;
@@ -22,7 +21,7 @@ public abstract class NumberIterable<T extends Number> implements Iterable<T>{
         this.decimalPlaces = rule.getDecimalPlaces();
     }
 
-    public boolean hasNextNumber(){
+    public boolean hasNextNumber() {
         return (iterations == null) || (count <= iterations);
     }
 
