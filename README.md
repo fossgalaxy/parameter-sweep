@@ -10,4 +10,5 @@ mvn clean package
 ## Release to central
 ```bash
 mvn -P release deploy
+git tag -s v1.5 -m 'v0.1'
 ```
