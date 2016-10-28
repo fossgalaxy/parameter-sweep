@@ -13,6 +13,13 @@
     <artifactId>parameter-sweep</artifactId>
     <version>1.0</version>
 
+ <distributionManagement>
+    <site>
+      <id>fossgalaxy.website.static</id>
+      <url>scp://docs.fossgalaxy.com/srv/public_sites/${project.artifactId}</url>
+    </site>
+  </distributionManagement>
+
 	<developers>
 		<developer>
 			<id>pwillic</id>
