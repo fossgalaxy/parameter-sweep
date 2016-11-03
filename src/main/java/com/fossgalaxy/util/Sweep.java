@@ -149,13 +149,6 @@ public class Sweep implements ParameterSweep {
     }
 
     @Override
-    public void setFloat(String key, float minValue, float maxValue, float step, int decimalPlaces) {
-        clearKey(key);
-        floatRules.put(key, new FloatRule(minValue, maxValue, step, decimalPlaces));
-        registerKey(key, floatRules);
-    }
-
-    @Override
     public void setOneOfFloat(String key, Float... values) {
         clearKey(key);
         floatOneOfRules.put(key, new OneOfRule<>(values));
@@ -208,13 +201,6 @@ public class Sweep implements ParameterSweep {
     public void setDouble(String key, double minValue, double maxValue, double step) {
         clearKey(key);
         doubleRules.put(key, new DoubleRule(minValue, maxValue, step));
-        registerKey(key, doubleRules);
-    }
-
-    @Override
-    public void setDouble(String key, double minValue, double maxValue, double step, int decimalPlaces) {
-        clearKey(key);
-        doubleRules.put(key, new DoubleRule(minValue, maxValue, step, decimalPlaces));
         registerKey(key, doubleRules);
     }
 

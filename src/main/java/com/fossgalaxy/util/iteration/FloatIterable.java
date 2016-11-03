@@ -29,7 +29,7 @@ public class FloatIterable extends NumberIterable<Float> {
                 }
                 if (step == null) {
                     count++;
-                    return (random.nextFloat() * (max - min)) + min;
+                    return truncate((random.nextFloat() * (max - min)) + min);
                 }
                 return min + (count++ * step);
             }

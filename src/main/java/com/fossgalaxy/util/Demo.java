@@ -60,6 +60,12 @@ public class Demo {
         sweep.getObjectStream("Students", 3, Student.class)
                 .map(x -> x.name + ":" + x.grades)
                 .forEach(System.out::println);
+
+        sweep.setDouble("J", 0, 1, 3);
+
+        for(double j : sweep.getDouble("J", 10)){
+            System.out.println(j);
+        }
     }
 }
 

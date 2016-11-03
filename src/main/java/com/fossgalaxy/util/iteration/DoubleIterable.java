@@ -34,7 +34,7 @@ public class DoubleIterable extends NumberIterable<Double> {
                 }
                 if (step == null) {
                     count++;
-                    return (random.nextDouble() * (max - min)) + min;
+                    return truncate((random.nextDouble() * (max - min)) + min);
                 }
                 return min + (count++ * step);
             }

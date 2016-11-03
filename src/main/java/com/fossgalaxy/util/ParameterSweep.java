@@ -90,6 +90,13 @@ public interface ParameterSweep {
      */
     void setFloat(String key);
 
+    /**
+     * Sets a new random parameter with the given key. Will overwrite an existing
+     * rule with the same name
+     *
+     * @param key           The key for use
+     * @param decimalPlaces The number of decimal places to truncate the value to
+     */
     void setFloat(String key, int decimalPlaces);
 
     /**
@@ -103,6 +110,16 @@ public interface ParameterSweep {
      */
     void setFloat(String key, float maxValue);
 
+    /**
+     * Sets a new random parameter with the given key. Will overwrite an existing
+     * rule with the same name.
+     * <p>
+     * The values will be between [0 - maxValue] inclusive
+     *
+     * @param key           the key for use
+     * @param maxValue      the maximum value that can be returned
+     * @param decimalPlaces The number of decimal places to truncate the value to
+     */
     void setFloat(String key, float maxValue, int decimalPlaces);
 
     /**
@@ -117,6 +134,17 @@ public interface ParameterSweep {
      */
     void setFloat(String key, float minValue, float maxValue);
 
+    /**
+     * Sets a new random parameter with the given key. Will overwrite an existing
+     * rule with the same name.
+     * <p>
+     * The values will be between [minValue - maxValue] inclusive
+     *
+     * @param key           the key for use
+     * @param minValue      the minimum value that can be returned
+     * @param maxValue      the maximum value that can be returned
+     * @param decimalPlaces The number of decimal places to truncate the value to
+     */
     void setFloat(String key, float minValue, float maxValue, int decimalPlaces);
 
     /**
@@ -136,7 +164,6 @@ public interface ParameterSweep {
      */
     void setFloat(String key, float minValue, float maxValue, float step);
 
-    void setFloat(String key, float minValue, float maxValue, float step, int decimalPlaces);
 
     /**
      * Sets a new random parameter with the given key. Will overwrite an existing
@@ -166,6 +193,16 @@ public interface ParameterSweep {
      */
     void setDouble(String key, double maxValue);
 
+    /**
+     * Sets a new random parameter with the given key. Will overwrite an existing
+     * rule with the same name.
+     * <p>
+     * The values will be between [0 - maxValue] inclusive
+     *
+     * @param key           the key for use
+     * @param maxValue      the maximum value that can be returned
+     * @param decimalPlaces The number of decimal places to truncate the value to
+     */
     void setDouble(String key, double maxValue, int decimalPlaces);
 
     /**
@@ -211,38 +248,61 @@ public interface ParameterSweep {
     void setDouble(String key, double minValue, double maxValue, double step);
 
     /**
-     * Sets a new stepped parameter with the given key. Will overwrite an existing
-     * rule with the same name.
-     * <p>
-     * The values will be between [minValue - maxValue] inclusive with a stepping of [step]
-     * <p>
-     * maxValue may never be returned if it isn't possible due to the step and minValue
-     * <p>
-     * for example ("T", 2, 5, 2) can't return 5
+     * Set a new parameter that will iterate through the provided list
      *
-     * @param key           The key for use
-     * @param minValue      The minimum value that can be returned
-     * @param maxValue      The maximum value that can be returned
-     * @param step          The step of the values
-     * @param decimalPlaces The number of decimal places to truncate the value to
+     * @param key    The key for use
+     * @param values The values for use
      */
-    void setDouble(String key, double minValue, double maxValue, double step, int decimalPlaces);
-
-
     void setOneOfFloat(String key, Float... values);
 
+    /**
+     * Set a new parameter that will iterate through the provided list
+     *
+     * @param key    The key for use
+     * @param values The values for use
+     */
     void setOneOfDouble(String key, Double... values);
 
+    /**
+     * Set a new parameter that will iterate through the provided list
+     *
+     * @param key    The key for use
+     * @param values The values for use
+     */
     void setOneOf(String key, Object... values);
 
+    /**
+     * Gets an Iterable<Boolean> that corresponds to the given key
+     *
+     * @param key The key for use
+     * @return The iterable
+     */
     Iterable<Boolean> getBoolean(String key);
 
+    /**
+     * Gets an Iterable<Boolean> that corresponds to the given key
+     *
+     * @param key The key for use
+     * @return The iterable
+     */
     Iterable<Boolean> getBoolean(String key, Integer n);
 
     Boolean getBooleanSingle(String key);
 
+    /**
+     * Gets an Iterable<Integer> that corresponds to the given key
+     *
+     * @param key The key for use
+     * @return The iterable
+     */
     Iterable<Integer> getInteger(String key);
 
+    /**
+     * Gets an Iterable<Integer> that corresponds to the given key
+     *
+     * @param key The key for use
+     * @return The iterable
+     */
     Iterable<Integer> getInteger(String key, Integer n);
 
     Integer getIntegerSingle(String key);
@@ -251,9 +311,20 @@ public interface ParameterSweep {
 
     Stream<Integer> getIntegerStream(String key, Integer n);
 
-
+    /**
+     * Gets an Iterable<Float> that corresponds to the given key
+     *
+     * @param key The key for use
+     * @return The iterable
+     */
     Iterable<Float> getFloat(String key);
 
+    /**
+     * Gets an Iterable<Float> that corresponds to the given key
+     *
+     * @param key The key for use
+     * @return The iterable
+     */
     Iterable<Float> getFloat(String key, Integer n);
 
     Float getFloatSingle(String key);
@@ -262,8 +333,20 @@ public interface ParameterSweep {
 
     Stream<Float> getFloatStream(String key, Integer n);
 
+    /**
+     * Gets an Iterable<Double> that corresponds to the given key
+     *
+     * @param key The key for use
+     * @return The iterable
+     */
     Iterable<Double> getDouble(String key);
 
+    /**
+     * Gets an Iterable<Double> that corresponds to the given key
+     *
+     * @param key The key for use
+     * @return The iterable
+     */
     Iterable<Double> getDouble(String key, Integer n);
 
     Double getDoubleSingle(String key);
@@ -272,8 +355,20 @@ public interface ParameterSweep {
 
     Stream<Double> getDoubleStream(String key, Integer n);
 
+    /**
+     * Gets an Iterable<Object> that corresponds to the given key
+     *
+     * @param key The key for use
+     * @return The iterable
+     */
     Iterable<Object> getObject(String key);
 
+    /**
+     * Gets an Iterable<Object> that corresponds to the given key
+     *
+     * @param key The key for use
+     * @return The iterable
+     */
     Iterable<Object> getObject(String key, Integer n);
 
     Stream getObjectStream(String key);
