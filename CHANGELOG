@@ -1,2 +1,6 @@
-# v0.1 Initial Release
+# v1.0 Initial Release
 * supports ints, booleans, floats, doubles and objects
+
+# v1.1 bugfix 1
+* Put classes in a java package
+* Ensure that interators though no such element exceptions

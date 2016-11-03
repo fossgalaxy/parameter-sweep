@@ -11,7 +11,9 @@
 
     <groupId>com.fossgalaxy.util</groupId>
     <artifactId>parameter-sweep</artifactId>
-    <version>1.0</version>
+    <version>1.1</version>
+    <name>Parameter Sweep Library</name>
+    <description>Code for doing parameter sweeps in Java</description>
 
  <distributionManagement>
     <site>
