@@ -11,7 +11,7 @@ public interface ParameterSweep {
 
     /**
      * Sets a new random parameter with the given key. Will overwrite an existing
-     * Boolean rule with the same name
+     * rule with the same name
      *
      * @param key The key for use
      */
@@ -19,7 +19,7 @@ public interface ParameterSweep {
 
     /**
      * Sets a new random parameter with the given key. Will overwrite an existing
-     * Boolean rule with the same name
+     * rule with the same name
      *
      * @param key             The key for use
      * @param trueProbability The probability that the random parameter will be true. Between [0-1]
@@ -28,7 +28,7 @@ public interface ParameterSweep {
 
     /**
      * Sets a new random parameter with the given key. Will overwrite an existing
-     * Integer rule with the same name
+     * rule with the same name
      *
      * @param key The key for use
      */
@@ -36,7 +36,7 @@ public interface ParameterSweep {
 
     /**
      * Sets a new random parameter with the given key. Will overwrite an existing
-     * Integer rule with the same name.
+     * rule with the same name.
      * <p>
      * The values will be between [0 - maxValue] inclusive
      *
@@ -47,7 +47,7 @@ public interface ParameterSweep {
 
     /**
      * Sets a new random parameter with the given key. Will overwrite an existing
-     * Integer rule with the same name.
+     * rule with the same name.
      * <p>
      * The values will be between [minValue - maxValue] inclusive
      *
@@ -59,7 +59,7 @@ public interface ParameterSweep {
 
     /**
      * Sets a new stepped parameter with the given key. Will overwrite an existing
-     * Integer rule with the same name.
+     * rule with the same name.
      * <p>
      * The values will be between [minValue - maxValue] inclusive with a stepping of [step]
      * <p>
@@ -82,36 +82,150 @@ public interface ParameterSweep {
      */
     void setOneOfInteger(String key, Integer... values);
 
+    /**
+     * Sets a new random parameter with the given key. Will overwrite an existing
+     * rule with the same name
+     *
+     * @param key The key for use
+     */
     void setFloat(String key);
 
     void setFloat(String key, int decimalPlaces);
 
+    /**
+     * Sets a new random parameter with the given key. Will overwrite an existing
+     * rule with the same name.
+     * <p>
+     * The values will be between [0 - maxValue] inclusive
+     *
+     * @param key      the key for use
+     * @param maxValue the maximum value that can be returned
+     */
     void setFloat(String key, float maxValue);
 
     void setFloat(String key, float maxValue, int decimalPlaces);
 
+    /**
+     * Sets a new random parameter with the given key. Will overwrite an existing
+     * rule with the same name.
+     * <p>
+     * The values will be between [minValue - maxValue] inclusive
+     *
+     * @param key      the key for use
+     * @param minValue the minimum value that can be returned
+     * @param maxValue the maximum value that can be returned
+     */
     void setFloat(String key, float minValue, float maxValue);
 
     void setFloat(String key, float minValue, float maxValue, int decimalPlaces);
 
+    /**
+     * Sets a new stepped parameter with the given key. Will overwrite an existing
+     * rule with the same name.
+     * <p>
+     * The values will be between [minValue - maxValue] inclusive with a stepping of [step]
+     * <p>
+     * maxValue may never be returned if it isn't possible due to the step and minValue
+     * <p>
+     * for example ("T", 2, 5, 2) can't return 5
+     *
+     * @param key      The key for use
+     * @param minValue The minimum value that can be returned
+     * @param maxValue The maximum value that can be returned
+     * @param step     The step of the values
+     */
     void setFloat(String key, float minValue, float maxValue, float step);
 
     void setFloat(String key, float minValue, float maxValue, float step, int decimalPlaces);
 
+    /**
+     * Sets a new random parameter with the given key. Will overwrite an existing
+     * rule with the same name
+     *
+     * @param key The key for use
+     */
     void setDouble(String key);
 
+    /**
+     * Sets a new random parameter with the given key. Will overwrite an existing
+     * rule with the same name
+     *
+     * @param key           The key for use
+     * @param decimalPlaces The number of decimal places to truncate the value to
+     */
     void setDouble(String key, int decimalPlaces);
 
+    /**
+     * Sets a new random parameter with the given key. Will overwrite an existing
+     * rule with the same name.
+     * <p>
+     * The values will be between [0 - maxValue] inclusive
+     *
+     * @param key      the key for use
+     * @param maxValue the maximum value that can be returned
+     */
     void setDouble(String key, double maxValue);
 
     void setDouble(String key, double maxValue, int decimalPlaces);
 
+    /**
+     * Sets a new random parameter with the given key. Will overwrite an existing
+     * rule with the same name.
+     * <p>
+     * The values will be between [minValue - maxValue] inclusive
+     *
+     * @param key      the key for use
+     * @param minValue the minimum value that can be returned
+     * @param maxValue the maximum value that can be returned
+     */
     void setDouble(String key, double minValue, double maxValue);
 
+    /**
+     * Sets a new random parameter with the given key. Will overwrite an existing
+     * rule with the same name.
+     * <p>
+     * The values will be between [minValue - maxValue] inclusive
+     *
+     * @param key           the key for use
+     * @param minValue      the minimum value that can be returned
+     * @param maxValue      the maximum value that can be returned
+     * @param decimalPlaces The number of decimal places to truncate the value to
+     */
     void setDouble(String key, double minValue, double maxValue, int decimalPlaces);
 
+    /**
+     * Sets a new stepped parameter with the given key. Will overwrite an existing
+     * rule with the same name.
+     * <p>
+     * The values will be between [minValue - maxValue] inclusive with a stepping of [step]
+     * <p>
+     * maxValue may never be returned if it isn't possible due to the step and minValue
+     * <p>
+     * for example ("T", 2, 5, 2) can't return 5
+     *
+     * @param key      The key for use
+     * @param minValue The minimum value that can be returned
+     * @param maxValue The maximum value that can be returned
+     * @param step     The step of the values
+     */
     void setDouble(String key, double minValue, double maxValue, double step);
 
+    /**
+     * Sets a new stepped parameter with the given key. Will overwrite an existing
+     * rule with the same name.
+     * <p>
+     * The values will be between [minValue - maxValue] inclusive with a stepping of [step]
+     * <p>
+     * maxValue may never be returned if it isn't possible due to the step and minValue
+     * <p>
+     * for example ("T", 2, 5, 2) can't return 5
+     *
+     * @param key           The key for use
+     * @param minValue      The minimum value that can be returned
+     * @param maxValue      The maximum value that can be returned
+     * @param step          The step of the values
+     * @param decimalPlaces The number of decimal places to truncate the value to
+     */
     void setDouble(String key, double minValue, double maxValue, double step, int decimalPlaces);
 
 
@@ -125,9 +239,13 @@ public interface ParameterSweep {
 
     Iterable<Boolean> getBoolean(String key, Integer n);
 
+    Boolean getBooleanSingle(String key);
+
     Iterable<Integer> getInteger(String key);
 
     Iterable<Integer> getInteger(String key, Integer n);
+
+    Integer getIntegerSingle(String key);
 
     Stream<Integer> getIntegerStream(String key);
 
@@ -138,6 +256,8 @@ public interface ParameterSweep {
 
     Iterable<Float> getFloat(String key, Integer n);
 
+    Float getFloatSingle(String key);
+
     Stream<Float> getFloatStream(String key);
 
     Stream<Float> getFloatStream(String key, Integer n);
@@ -145,6 +265,8 @@ public interface ParameterSweep {
     Iterable<Double> getDouble(String key);
 
     Iterable<Double> getDouble(String key, Integer n);
+
+    Double getDoubleSingle(String key);
 
     Stream<Double> getDoubleStream(String key);
 

@@ -20,158 +20,216 @@ public class Sweep implements ParameterSweep {
     private final HashMap<String, OneOfRule<Double>> doubleOneOfRules = new HashMap<>();
     private final HashMap<String, OneOfRule<Object>> objectOneOfRules = new HashMap<>();
 
+    private final HashMap<String, Iterator<Boolean>> cachedBooleanIterators = new HashMap<>();
+    private final HashMap<String, Iterator<Integer>> cachedIntegerIterators = new HashMap<>();
+    private final HashMap<String, Iterator<Float>> cachedFloatIterators = new HashMap<>();
+    private final HashMap<String, Iterator<Double>> cachedDoubleIterators = new HashMap<>();
+
+    // Stores the maps that a key has been used in
+    private final HashMap<String, ArrayList<HashMap>> keyMap = new HashMap<>();
+
+    /**
+     * Will clear the key from any map that has been registered as using it
+     *
+     * @param key The key to clear with
+     */
+    private void clearKey(String key) {
+        // Clear out old use of this key
+        if (keyMap.containsKey(key)) {
+            keyMap.get(key).forEach(x -> x.remove(key));
+        }
+    }
+
+    /**
+     * Will register a key as used with a map without overwriting the key anywhere
+     *
+     * @param key The key that is being used
+     * @param map The map that the key is being used in
+     */
+    private void registerKey(String key, HashMap map) {
+        keyMap.computeIfAbsent(key, x -> new ArrayList<>()).add(map);
+    }
+
     @Override
     public void setBoolean(String key) {
+        clearKey(key);
         booleanRules.put(key, new BooleanRule());
+        registerKey(key, booleanRules);
     }
 
     @Override
     public void setBoolean(String key, double trueProbability) {
+        clearKey(key);
         booleanRules.put(key, new BooleanRule(trueProbability));
+        registerKey(key, booleanRules);
     }
 
     @Override
     public void setInteger(String key) {
+        clearKey(key);
         integerRules.put(key, new IntegerRule());
-        if (integerOneOfRules.containsKey(key)) integerOneOfRules.remove(key);
+        registerKey(key, integerRules);
     }
 
     @Override
     public void setInteger(String key, int maxValue) {
+        clearKey(key);
         integerRules.put(key, new IntegerRule(maxValue));
-        if (integerOneOfRules.containsKey(key)) integerOneOfRules.remove(key);
+        registerKey(key, integerRules);
     }
 
     @Override
     public void setInteger(String key, int minValue, int maxValue) {
+        clearKey(key);
         integerRules.put(key, new IntegerRule(minValue, maxValue));
-        if (integerOneOfRules.containsKey(key)) integerOneOfRules.remove(key);
+        registerKey(key, integerRules);
     }
 
     @Override
     public void setInteger(String key, int minValue, int maxValue, int step) {
+        clearKey(key);
         integerRules.put(key, new IntegerRule(minValue, maxValue, step));
-        if (integerOneOfRules.containsKey(key)) integerOneOfRules.remove(key);
+        registerKey(key, integerRules);
     }
 
     @Override
     public void setOneOfInteger(String key, Integer... values) {
+        clearKey(key);
         integerOneOfRules.put(key, new OneOfRule<>(values));
-        if (integerRules.containsKey(key)) integerRules.remove(key);
+        registerKey(key, integerOneOfRules);
     }
 
     @Override
     public void setFloat(String key) {
+        clearKey(key);
         floatRules.put(key, new FloatRule());
-        if (floatOneOfRules.containsKey(key)) floatOneOfRules.remove(key);
+        registerKey(key, floatRules);
     }
 
     @Override
     public void setFloat(String key, int decimalPlaces) {
+        clearKey(key);
         floatRules.put(key, new FloatRule(decimalPlaces));
-        if (floatOneOfRules.containsKey(key)) floatOneOfRules.remove(key);
+        registerKey(key, floatRules);
     }
 
     @Override
     public void setFloat(String key, float maxValue) {
+        clearKey(key);
         floatRules.put(key, new FloatRule(maxValue));
-        if (floatOneOfRules.containsKey(key)) floatOneOfRules.remove(key);
+        registerKey(key, floatRules);
     }
 
     @Override
     public void setFloat(String key, float maxValue, int decimalPlaces) {
+        clearKey(key);
         floatRules.put(key, new FloatRule(maxValue, decimalPlaces));
-        if (floatOneOfRules.containsKey(key)) floatOneOfRules.remove(key);
+        registerKey(key, floatRules);
     }
 
     @Override
     public void setFloat(String key, float minValue, float maxValue) {
+        clearKey(key);
         floatRules.put(key, new FloatRule(minValue, maxValue));
-        if (floatOneOfRules.containsKey(key)) floatOneOfRules.remove(key);
+        registerKey(key, floatRules);
     }
 
     @Override
     public void setFloat(String key, float minValue, float maxValue, int decimalPlaces) {
+        clearKey(key);
         floatRules.put(key, new FloatRule(minValue, maxValue, decimalPlaces));
-        if (floatOneOfRules.containsKey(key)) floatOneOfRules.remove(key);
+        registerKey(key, floatRules);
     }
 
     @Override
     public void setFloat(String key, float minValue, float maxValue, float step) {
+        clearKey(key);
         floatRules.put(key, new FloatRule(minValue, maxValue, step));
-        if (floatOneOfRules.containsKey(key)) floatOneOfRules.remove(key);
+        registerKey(key, floatRules);
     }
 
     @Override
     public void setFloat(String key, float minValue, float maxValue, float step, int decimalPlaces) {
+        clearKey(key);
         floatRules.put(key, new FloatRule(minValue, maxValue, step, decimalPlaces));
-        if (floatOneOfRules.containsKey(key)) floatOneOfRules.remove(key);
-
+        registerKey(key, floatRules);
     }
 
     @Override
     public void setOneOfFloat(String key, Float... values) {
+        clearKey(key);
         floatOneOfRules.put(key, new OneOfRule<>(values));
-        if (floatRules.containsKey(key)) floatRules.remove(key);
+        registerKey(key, floatOneOfRules);
     }
 
     @Override
     public void setDouble(String key) {
+        clearKey(key);
         doubleRules.put(key, new DoubleRule());
-        if (doubleOneOfRules.containsKey(key)) doubleOneOfRules.remove(key);
+        registerKey(key, doubleRules);
     }
 
     @Override
     public void setDouble(String key, int decimalPlaces) {
+        clearKey(key);
         doubleRules.put(key, new DoubleRule(decimalPlaces));
-        if (doubleOneOfRules.containsKey(key)) doubleOneOfRules.remove(key);
+        registerKey(key, doubleRules);
     }
 
     @Override
     public void setDouble(String key, double maxValue) {
+        clearKey(key);
         doubleRules.put(key, new DoubleRule(maxValue));
-        if (doubleOneOfRules.containsKey(key)) doubleOneOfRules.remove(key);
+        registerKey(key, doubleRules);
     }
 
     @Override
     public void setDouble(String key, double maxValue, int decimalPlaces) {
+        clearKey(key);
         doubleRules.put(key, new DoubleRule(maxValue, decimalPlaces));
-        if (doubleOneOfRules.containsKey(key)) doubleOneOfRules.remove(key);
+        registerKey(key, doubleRules);
     }
 
     @Override
     public void setDouble(String key, double minValue, double maxValue) {
+        clearKey(key);
         doubleRules.put(key, new DoubleRule(minValue, maxValue));
-        if (doubleOneOfRules.containsKey(key)) doubleOneOfRules.remove(key);
+        registerKey(key, doubleRules);
     }
 
     @Override
     public void setDouble(String key, double minValue, double maxValue, int decimalPlaces) {
+        clearKey(key);
         doubleRules.put(key, new DoubleRule(minValue, maxValue, decimalPlaces));
-        if (doubleOneOfRules.containsKey(key)) doubleOneOfRules.remove(key);
+        registerKey(key, doubleRules);
     }
 
     @Override
     public void setDouble(String key, double minValue, double maxValue, double step) {
+        clearKey(key);
         doubleRules.put(key, new DoubleRule(minValue, maxValue, step));
-        if (doubleOneOfRules.containsKey(key)) doubleOneOfRules.remove(key);
+        registerKey(key, doubleRules);
     }
 
     @Override
     public void setDouble(String key, double minValue, double maxValue, double step, int decimalPlaces) {
+        clearKey(key);
         doubleRules.put(key, new DoubleRule(minValue, maxValue, step, decimalPlaces));
-        if (doubleOneOfRules.containsKey(key)) doubleOneOfRules.remove(key);
+        registerKey(key, doubleRules);
     }
 
     @Override
     public void setOneOfDouble(String key, Double... values) {
+        clearKey(key);
         doubleOneOfRules.put(key, new OneOfRule<>(values));
-        if (doubleRules.containsKey(key)) doubleRules.remove(key);
+        registerKey(key, doubleOneOfRules);
     }
 
     @Override
     public void setOneOf(String key, Object... values) {
+        clearKey(key);
         objectOneOfRules.put(key, new OneOfRule<>(values));
+        registerKey(key, objectOneOfRules);
     }
 
     @Override
@@ -195,7 +253,7 @@ public class Sweep implements ParameterSweep {
                     }
 
                     public Boolean next() {
-                        if(!hasNext()){
+                        if (!hasNext()) {
                             throw new NoSuchElementException();
                         }
                         count++;
@@ -211,6 +269,17 @@ public class Sweep implements ParameterSweep {
     }
 
     @Override
+    public Boolean getBooleanSingle(String key) {
+        return cachedBooleanIterators.computeIfAbsent(
+                key,
+                (x) -> {
+                    registerKey(x, cachedBooleanIterators);
+                    return getBoolean(x).iterator();
+                }
+        ).next();
+    }
+
+    @Override
     public Iterable<Integer> getInteger(final String key) {
         return getInteger(key, null);
     }
@@ -221,6 +290,17 @@ public class Sweep implements ParameterSweep {
             throw new IllegalArgumentException("Key not present: " + key);
         }
         return (integerRules.containsKey(key)) ? new IntegerIterable(integerRules.get(key), n) : new OneOfIterable<>(integerOneOfRules.get(key), n);
+    }
+
+    @Override
+    public Integer getIntegerSingle(String key) {
+        return cachedIntegerIterators.computeIfAbsent(
+                key,
+                (x) -> {
+                    registerKey(x, cachedIntegerIterators);
+                    return getInteger(x).iterator();
+                }
+        ).next();
     }
 
     @Override
@@ -247,6 +327,17 @@ public class Sweep implements ParameterSweep {
     }
 
     @Override
+    public Float getFloatSingle(String key) {
+        return cachedFloatIterators.computeIfAbsent(
+                key,
+                (x) -> {
+                    registerKey(x, cachedFloatIterators);
+                    return getFloat(x).iterator();
+                }
+        ).next();
+    }
+
+    @Override
     public Stream<Float> getFloatStream(String key) {
         return getFloatStream(key, null);
     }
@@ -267,6 +358,17 @@ public class Sweep implements ParameterSweep {
             throw new IllegalArgumentException("Key not present: " + key);
         }
         return (doubleRules.containsKey(key)) ? new DoubleIterable(doubleRules.get(key), n) : new OneOfIterable<>(doubleOneOfRules.get(key), n);
+    }
+
+    @Override
+    public Double getDoubleSingle(String key) {
+        return cachedDoubleIterators.computeIfAbsent(
+                key,
+                (x) -> {
+                    registerKey(x, cachedDoubleIterators);
+                    return getDouble(x).iterator();
+                }
+        ).next();
     }
 
     @Override
